@@ -1,3 +1,7 @@
+import os
+os.environ["BLIP_REPO_ROOT"] = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+BLIP_REPO_ROOT = os.environ.get('BLIP_REPO_ROOT')
+
 from models.med import BertConfig, BertModel
 from transformers import BertTokenizer
 
@@ -9,7 +13,7 @@ from models.blip import create_vit, init_tokenizer, load_checkpoint
 
 class BLIP_ITM(nn.Module):
     def __init__(self,                 
-                 med_config = 'configs/med_config.json',  
+                 med_config = f'{BLIP_REPO_ROOT}/configs/med_config.json',  
                  image_size = 384,
                  vit = 'base',
                  vit_grad_ckpt = False,
